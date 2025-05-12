@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyPropRunner implements ApplicationRunner {
-    @Value("${myprop.username")
+    @Value("${myprop.username}")
     private String username;
 
-    @Value("${myprop.port")
+    @Value("${myprop.port}")
     private int port;
 
     @Autowired
@@ -59,4 +59,4 @@ public class MyPropRunner implements ApplicationRunner {
                 .forEach(name -> System.out.println(name));
 
     }//run
-}
+}//class
