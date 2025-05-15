@@ -1,19 +1,20 @@
 package com.rookies3.myspringbootlab.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "books")
-@Getter @Setter
-@DynamicUpdate
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
@@ -28,9 +29,12 @@ public class Book {
     @Column(unique = true, nullable = false)
     private String isbn;
 
-    @Column(nullable = false)
     private Integer price;
 
-    @Column(nullable = false)
     private LocalDate publishDate;
+
+    @OneToOne(mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private BookDetail bookDetail;
 }
