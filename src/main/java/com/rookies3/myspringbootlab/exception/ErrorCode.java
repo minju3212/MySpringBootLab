@@ -20,7 +20,17 @@ public enum ErrorCode {
     PHONE_NUMBER_DUPLICATE("Student detail already exists with phone number: %s", HttpStatus.CONFLICT),
 
     // Book specific errors - 도서 관련 특수한 경우
-    ISBN_DUPLICATE("Book already exists with ISBN: %s", HttpStatus.CONFLICT);
+    ISBN_DUPLICATE("Book already exists with ISBN: %s", HttpStatus.CONFLICT),
+    // Publisher specific errors - 출판사 관련 특수한 경우
+    PUBLISHER_NAME_DUPLICATE("Publisher already exists with name: %s", HttpStatus.CONFLICT),
+    PUBLISHER_HAS_BOOKS("Cannot delete publisher with id: %s. It has %s books", HttpStatus.CONFLICT),
+
+    // Department specific errors - 학과 관련 특수한 경우
+    DEPARTMENT_CODE_DUPLICATE("Department already exists with code: %s", HttpStatus.CONFLICT),
+    DEPARTMENT_NAME_DUPLICATE("Department already exists with name: %s", HttpStatus.CONFLICT),
+    DEPARTMENT_HAS_STUDENTS("Cannot delete department with id: %s. It has %s students",
+            HttpStatus.CONFLICT);
+
 
     private final String messageTemplate;
     private final HttpStatus httpStatus;
