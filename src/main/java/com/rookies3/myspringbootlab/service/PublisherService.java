@@ -1,6 +1,8 @@
 package com.rookies3.myspringbootlab.service;
 
+import com.rookies3.myspringbootlab.controller.dto.BookDTO;
 import com.rookies3.myspringbootlab.controller.dto.PublisherDTO;
+import com.rookies3.myspringbootlab.entity.Book;
 import com.rookies3.myspringbootlab.entity.Publisher;
 import com.rookies3.myspringbootlab.exception.BusinessException;
 import com.rookies3.myspringbootlab.exception.ErrorCode;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +32,8 @@ public class PublisherService {
                     return PublisherDTO.SimpleResponse.builder()
                             .id(publisher.getId())
                             .name(publisher.getName())
+                            .establishedDate((publisher.getEstablishedDate()))
+                            .address(publisher.getAddress())
                             .bookCount(bookCount)
                             .build();
                 })
@@ -58,8 +63,8 @@ public class PublisherService {
 
         Publisher publisher = Publisher.builder()
                 .name(request.getName())
-                .address(request.getAddress())
                 .establishedDate(request.getEstablishedDate())
+                .address(request.getAddress())
                 .build();
 
         Publisher savedPublisher = publisherRepository.save(publisher);
@@ -79,8 +84,8 @@ public class PublisherService {
         }
 
         publisher.setName(request.getName());
-        publisher.setAddress(request.getAddress());
         publisher.setEstablishedDate(request.getEstablishedDate());
+        publisher.setAddress(request.getAddress());
 
         Publisher updatedPublisher = publisherRepository.save(publisher);
         return PublisherDTO.Response.fromEntity(updatedPublisher);

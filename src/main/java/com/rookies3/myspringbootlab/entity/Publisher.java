@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,7 +37,8 @@ public class Publisher {
             fetch = FetchType.LAZY
     )
     @JsonIgnore
-    private List<Book> books;
+    @Builder.Default
+    private List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
         books.add(book);
