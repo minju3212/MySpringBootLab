@@ -58,6 +58,8 @@ public class PublisherService {
 
         Publisher publisher = Publisher.builder()
                 .name(request.getName())
+                .address(request.getAddress())
+                .establishedDate(request.getEstablishedDate())
                 .build();
 
         Publisher savedPublisher = publisherRepository.save(publisher);
@@ -77,6 +79,8 @@ public class PublisherService {
         }
 
         publisher.setName(request.getName());
+        publisher.setAddress(request.getAddress());
+        publisher.setEstablishedDate(request.getEstablishedDate());
 
         Publisher updatedPublisher = publisherRepository.save(publisher);
         return PublisherDTO.Response.fromEntity(updatedPublisher);

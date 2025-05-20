@@ -19,10 +19,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    @Query("SELECT b FROM Book b LEFT JOIN FETCH b.bookDetail WHERE b.id = :id")
+    @Query("SELECT b FROM Book b JOIN FETCH b.bookDetail WHERE b.id = :id")
     Optional<Book> findByIdWithBookDetail(@Param("id") Long id);
 
-    @Query("SELECT b FROM Book b LEFT JOIN FETCH b.bookDetail WHERE b.isbn = :isbn")
+    @Query("SELECT b FROM Book b JOIN FETCH b.bookDetail WHERE b.isbn = :isbn")
     Optional<Book> findByIsbnWithBookDetail(@Param("isbn") String isbn);
 
     boolean existsByIsbn(String isbn);
@@ -32,4 +32,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT COUNT(b) FROM Book b WHERE b.publisher.id = :publisherId")
     Long countByPublisherId(@Param("publisherId") Long publisherId);
+
+    @Query("SELECT b FROM Book b JOIN FETCH b.bookDetail WHERE b.id = :id")
+    Optional<Book> findByIdWithAllDetails(@Param("id") Long id);
 }

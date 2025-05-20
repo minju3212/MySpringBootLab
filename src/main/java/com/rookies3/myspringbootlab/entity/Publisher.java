@@ -24,10 +24,10 @@ public class Publisher {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "established_date")
     private LocalDate establishedDate;
 
-    @Column(nullable = false)
+    @Column(name = "address")
     private String address;
 
     @OneToMany(
